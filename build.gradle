@@ -18,7 +18,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    PUBLISH_GROUP_ID = "com.xxx.xxxx"		//项目包名
-    PUBLISH_ARTIFACT_ID = 'xxxx'			//项目名
-    PUBLISH_VERSION = "0.0.1"					//版本号
+    PUBLISH_GROUP_ID = "io.github.jixiaoxin-5844"		//Group Id
+    PUBLISH_ARTIFACT_ID = 'ExtensionView'			//项目名
+    PUBLISH_VERSION = "1.0.0"					//版本号
 }
