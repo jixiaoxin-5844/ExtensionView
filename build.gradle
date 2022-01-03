@@ -16,3 +16,9 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    PUBLISH_GROUP_ID = "com.xxx.xxxx"		//项目包名
+    PUBLISH_ARTIFACT_ID = 'xxxx'			//项目名
+    PUBLISH_VERSION = "0.0.1"					//版本号
+}
