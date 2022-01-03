@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ExtensionView"
 include ':app'
+include ':lib_view'
