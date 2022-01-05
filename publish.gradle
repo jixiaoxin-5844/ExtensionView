@@ -1,0 +1,81 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+ext["signing.keyId"] = ''
+ext["signing.password"] = ''
+ext["signing.secretKeyRingFile"] = ''
+ext["ossrhUsername"] = ''
+ext["ossrhPassword"] = ''
+
+
+File secretPropsFile = project.rootProject.file('local.properties')
+if (secretPropsFile.exists()) {
+    println "Found secret props file, loading props"
+    Properties p = new Properties()
+    p.load(new FileInputStream(secretPropsFile))
+    p.each { name, value ->
+        ext[name] = value
+    }
+} else {
+    println "No props file, loading env vars"
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = ExtensionView.PUBLISH_GROUP_ID
+                artifactId = ExtensionView.PUBLISH_ARTIFACT_ID
+                version = ExtensionView.PUBLISH_VERSION
+
+                from components.release
+                // generate pom.xml
+                pom {
+                    name = ExtensionView.name
+                    description = ExtensionView.description
+                    url = ExtensionView.url
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = ExtensionView.developerId
+                            name = ExtensionView.developerName
+                            email = ExtensionView.developerEmail
+                        }
+                    }
+                    scm {
+                        url = ExtensionView.projectGit
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                // change to point to your repo
+                def releaseRepo = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                def snapshotRepo = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+
+                url = publishing.publications.release.version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
+                credentials {
+                    username = project.properties['credencial.username']
+                    password = project.properties['credencial.password']
+                }
+            }
+            maven {
+                name ExtensionView.mavenName
+                url = layout.buildDirectory.dir('repo')
+            }
+        }
+    }
+
+    if(project.properties['signing.keyId']&&project.properties['signing.password']&&project.properties['signing.secretKeyRingFile']){
+        signing {
+            sign publishing.publications.release
+        }
+    }
+}

@@ -11,5 +11,7 @@ class MainActivity : AppCompatActivity() {
 
         TestMaven(2)
 
+        //MavenTest()
+
     }
 }
