@@ -4,7 +4,7 @@ public class MavenTest {
 
     public int vv;
 
-    MavenTest(int vv){
+    public MavenTest(int vv){
         this.vv = vv;
     }
 }
