@@ -3,7 +3,7 @@ buildscript {
     ext.ExtensionView = [
             'PUBLISH_GROUP_ID'   : 'io.github.jixiaoxin-5844',        //Group Id
             'PUBLISH_ARTIFACT_ID': 'ExtensionView',            //项目名
-            'PUBLISH_VERSION'    : '1.0.0',                    //版本号
+            'PUBLISH_VERSION'    : '1.0.1',                    //版本号
             'name'               : 'lib_view',    // '发布库的简单名称'
             'description'        : '第三方view扩展包',    // '发布包的描述'
             'url'                : 'https://github.com/jixiaoxin-5844',    // '可以写公司官网地址或github个人页面地址'
@@ -20,7 +20,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
